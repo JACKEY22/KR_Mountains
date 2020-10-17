@@ -84,7 +84,7 @@ for mt_name in data['mt_name_list']:
     data['mt_acc_x'].append(mt_acc_x)
     data['mt_acc_y'].append(mt_acc_y)
 
-with MongoClient('mongodb://192.168.219.126:27017') as client:
+with MongoClient('mongodb://192.168.219.104:27017') as client:
     db = client.mydb
     for i in range(0,len(data['mt_name_list'])):
         data2 = {"mt_name_list":data['mt_name_list'][i],
@@ -104,7 +104,7 @@ imgs = driver.find_elements_by_css_selector('.autosize')
 for img in imgs:
     src = img.get_attribute("src")
 
-    urllib.request.urlretrieve(src , f'{mt_name}'+'.jpg')     
+    urllib.request.urlretrieve(src , f'static/imgs/{mt_name}.jpg')     
 
 driver.quit()
 
