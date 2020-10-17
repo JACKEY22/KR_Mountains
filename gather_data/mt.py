@@ -103,19 +103,19 @@ with MongoClient('mongodb://192.168.219.104:27017') as client:
 imgs = driver.find_elements_by_css_selector('.autosize')
 for img in imgs:
     src = img.get_attribute("src")
+    data["img_src"].append(src)
 
+for mt_name, img_src in zip(data['mt_name_list'],data['img_src']):
     urllib.request.urlretrieve(src , f'static/imgs/{mt_name}.jpg')     
 
 driver.quit()
 
 #weather 
-#img
 #comment
 
-#folium
+#folium - django
 #list 
 #paging 
-
 #bootstrap
 
 
