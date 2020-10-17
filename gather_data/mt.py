@@ -23,7 +23,7 @@ data = {"mt_name_list":[],
         }
 
 ###################################
-##driver
+## selemium - get page
 ###################################
 options = Options()
 options.add_argument('--headless')
@@ -33,7 +33,9 @@ driver.get(url="http://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/Fm
 driver.find_element_by_xpath('//*[@id="mntUnit"]/option[5]').click()
 driver.find_element_by_xpath('//*[@id="txt"]/form/div[2]/div[2]/button').click()
 driver.implicitly_wait(10)
-
+#####################################
+## selenium - get mt_name, mt_height
+#####################################
 soup = bs(driver.page_source, features='lxml')
 div = soup.select('div.list_info')
 
@@ -46,7 +48,9 @@ for i in div:
         mt_name = mt_name_temp
     data['mt_name_list'].append(mt_name)
     data['mt_height'].append(mt_height)
-
+######################################
+## kakaoAPI - get mt_x,y, mt_acc_info
+######################################
 for mt_name in data['mt_name_list']:
 
     keyword = f'{mt_name}'
@@ -83,7 +87,9 @@ for mt_name in data['mt_name_list']:
     data['mt_acc_link'].append(mt_acc_link)
     data['mt_acc_x'].append(mt_acc_x)
     data['mt_acc_y'].append(mt_acc_y)
-
+###########################################
+## pymongo - insert data
+###########################################
 with MongoClient('mongodb://192.168.219.104:27017') as client:
     db = client.mydb
     for i in range(0,len(data['mt_name_list'])):
@@ -99,6 +105,9 @@ with MongoClient('mongodb://192.168.219.104:27017') as client:
                 "mt_acc_y":data['mt_acc_y'][i]
             }
         db.mountain.insert(data2)
+###########################################
+## selenium - get mt_img
+###########################################
 
 imgs = driver.find_elements_by_css_selector('.autosize')
 for img in imgs:
