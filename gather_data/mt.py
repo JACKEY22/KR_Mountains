@@ -9,17 +9,18 @@ import requests
 import urllib
 
 
-data = {"mt_name_list":[],
+data = {"mt_name":[],
         "mt_height":[],
         "mt_x":[],
         "mt_y":[],
+        "mt_comment":[],
+        "mt_img_path" :[],
         "mt_acc_address":[],
         "mt_acc_phone" :[],
         "mt_acc_name":[],
         "mt_acc_link":[],
         "mt_acc_x" :[],
-        "mt_acc_y":[],
-        "img_src" :[]
+        "mt_acc_y":[]
         }
 
 ###################################
@@ -46,12 +47,12 @@ for i in div:
         mt_name = mt_name_temp.split("(")[0]
     else:
         mt_name = mt_name_temp
-    data['mt_name_list'].append(mt_name)
+    data['mt_name'].append(mt_name)
     data['mt_height'].append(mt_height)
 ######################################
 ## kakaoAPI - get mt_x,y, mt_acc_info
 ######################################
-for mt_name in data['mt_name_list']:
+for mt_name in data['mt_name']:
 
     keyword = f'{mt_name}'
     url = f'https://dapi.kakao.com/v2/local/search/keyword.json?query={keyword}'
@@ -88,15 +89,44 @@ for mt_name in data['mt_name_list']:
     data['mt_acc_x'].append(mt_acc_x)
     data['mt_acc_y'].append(mt_acc_y)
 ###########################################
+## selenium - get comment
+###########################################
+detail_links = soup.select("ul.lst_thumb li a[href]")
+for link in detail_links:
+    url = 'http://www.forest.go.kr/' + link['href']
+    res = requests.get(url)
+    soup = bs(res.content, 'lxml')
+    comment_temp = soup.select_one('#txt > h4').text
+    if "-" in comment_temp:
+        comment = comment_temp.text.split('-')[1].strip()
+    else:
+        comment = ""
+    data['mt_comment'].append(comment)
+###########################################
+## selenium - get mt_img
+###########################################
+imgs = driver.find_elements_by_css_selector('.autosize')
+img_srcs =[]
+for img in imgs:
+    src = img.get_attribute("src")
+    img_path = 'http://www.forest.go.kr'+src
+    data['mt_img_path'].append(img_path))
+    img_srcs.append(src)
+
+for mt_name, img_src in zip(data['mt_name'],img_srcs):
+    urllib.request.urlretrieve(src , f'static/imgs/{mt_name}.jpg')     
+###########################################
 ## pymongo - insert data
 ###########################################
 with MongoClient('mongodb://192.168.219.104:27017') as client:
     db = client.mydb
-    for i in range(0,len(data['mt_name_list'])):
-        data2 = {"mt_name_list":data['mt_name_list'][i],
+    for i in range(0,len(data['mt_name'])):
+        data2 = {"mt_name":data['mt_name'][i],
                 "mt_height":data['mt_height'][i],
                 "mt_x":data['mt_x'][i],
                 "mt_y":data['mt_y'][i],
+                "mt_comment":data['mt_commnet'][i],
+                "mt_img_path":data['mt_img_path'][i],
                 "mt_acc_address":data['mt_acc_address'][i],
                 "mt_acc_phone" :data['mt_acc_phone'][i],
                 "mt_acc_name":data['mt_acc_name'][i],
@@ -105,22 +135,12 @@ with MongoClient('mongodb://192.168.219.104:27017') as client:
                 "mt_acc_y":data['mt_acc_y'][i]
             }
         db.mountain.insert(data2)
-###########################################
-## selenium - get mt_img
-###########################################
 
-imgs = driver.find_elements_by_css_selector('.autosize')
-for img in imgs:
-    src = img.get_attribute("src")
-    data["img_src"].append(src)
-
-for mt_name, img_src in zip(data['mt_name_list'],data['img_src']):
-    urllib.request.urlretrieve(src , f'static/imgs/{mt_name}.jpg')     
-
+############################################
+## weather
+############################################
+    
 driver.quit()
-
-#weather 
-#comment
 
 #folium - django
 #list 
