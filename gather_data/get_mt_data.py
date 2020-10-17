@@ -48,7 +48,7 @@ for i in div:
     else:
         mt_name = mt_name_temp
     data['mt_name'].append(mt_name)
-    data['mt_height'].append(mt_height)
+    data['mt_height'].append(mt_height)   
 ######################################
 ## kakaoAPI - get mt_x,y, mt_acc_info
 ######################################
@@ -109,7 +109,7 @@ imgs = driver.find_elements_by_css_selector('.autosize')
 img_srcs =[]
 for img in imgs:
     src = img.get_attribute("src")
-    img_path = 'http://www.forest.go.kr'+src
+    img_path = src
     data['mt_img_path'].append(img_path)
     #img_srcs.append(src)
 
@@ -139,7 +139,7 @@ with MongoClient('mongodb://192.168.219.104:27017') as client:
 ############################################
 ## weather
 ############################################
-    
+
 driver.quit()
 
 #folium - django
