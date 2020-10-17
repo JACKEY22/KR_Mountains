@@ -27,7 +27,7 @@ data = {"mt_name":[],
 ## selemium - get page
 ###################################
 options = Options()
-options.add_argument('--headless')
+#options.add_argument('--headless')
 
 driver = webdriver.Chrome(executable_path="../chromedriver", chrome_options=options)
 driver.get(url="http://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12")
@@ -98,23 +98,23 @@ for link in detail_links:
     soup = bs(res.content, 'lxml')
     comment_temp = soup.select_one('#txt > h4').text
     if "-" in comment_temp:
-        comment = comment_temp.text.split('-')[1].strip()
+        comment = comment_temp.split('-')[1].strip()
     else:
         comment = ""
     data['mt_comment'].append(comment)
 ###########################################
-## selenium - get mt_img
+## selenium - get mt_img, mt_img_path
 ###########################################
 imgs = driver.find_elements_by_css_selector('.autosize')
 img_srcs =[]
 for img in imgs:
     src = img.get_attribute("src")
     img_path = 'http://www.forest.go.kr'+src
-    data['mt_img_path'].append(img_path))
-    img_srcs.append(src)
+    data['mt_img_path'].append(img_path)
+    #img_srcs.append(src)
 
-for mt_name, img_src in zip(data['mt_name'],img_srcs):
-    urllib.request.urlretrieve(src , f'static/imgs/{mt_name}.jpg')     
+# for mt_name, img_src in zip(data['mt_name'],img_srcs):
+#     urllib.request.urlretrieve(src , f'static/imgs/{mt_name}.jpg')     
 ###########################################
 ## pymongo - insert data
 ###########################################
@@ -125,7 +125,7 @@ with MongoClient('mongodb://192.168.219.104:27017') as client:
                 "mt_height":data['mt_height'][i],
                 "mt_x":data['mt_x'][i],
                 "mt_y":data['mt_y'][i],
-                "mt_comment":data['mt_commnet'][i],
+                "mt_comment":data['mt_comment'][i],
                 "mt_img_path":data['mt_img_path'][i],
                 "mt_acc_address":data['mt_acc_address'][i],
                 "mt_acc_phone" :data['mt_acc_phone'][i],
