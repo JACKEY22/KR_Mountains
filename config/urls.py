@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from mt import views as mtview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('home/', mtview.home, name='home'),
+    path('home/krmt/', mtview.100mt, name='100mt'),
+    path('home/acc/', mtview.acc, name='acc'),
+    
+    
 ]
