@@ -109,15 +109,15 @@ with MongoClient('mongodb://192.168.219.104:27017') as client:
                 "mt_acc_phone" :data['mt_acc_phone'][i],
                 "mt_acc_name":data['mt_acc_name'][i],
                 "mt_acc_link":data['mt_acc_link'][i],
-                "mt_acc_lat" :data['mt_acc_y'][i],
-                "mt_acc_lon":data['mt_acc_x'][i]
+                "mt_acc_lat" :data['mt_acc_lat'][i],
+                "mt_acc_lon":data['mt_acc_lon'][i]
             }
         db.mountain.insert(data2)
 
 ############################################
 ## openWeather - get weather info
 ############################################
-for x,y in zip(data['mt_lat'],data['mt_lon']):
+for mt_name,x,y in zip(data['mt_name'],data['mt_lat'],data['mt_lon']):
     API_key = 'd9a33dfaa19a045b98d9e6f57ce733ba'
     url = f'https://api.openweathermap.org/data/2.5/onecall?lat={x}&lon={y}&units=metric&appid={API_key}'
     res = requests.get(url).json()
@@ -130,8 +130,9 @@ for x,y in zip(data['mt_lat'],data['mt_lon']):
     # print(res['current']['humidity'])
     # print(res['current']['wind_speed'])
     # print(res['current']['wind_deg'])
-    print(res['current']['weather'][0]['main'])
+    print(mt_name,res['current']['weather'][0]['main'])
     # print(res['current']['weather'][0]['description'])
+
 #folium - django
 #list 
 #paging 
