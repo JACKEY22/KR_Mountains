@@ -1,1 +1,62 @@
-<h1>welcome!</h1>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="{% url 'home' %}">Korea Top100 Mountains</a>
+  
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'krmt' %}"> Mountain Map</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'acc' %}"> Accommodation Nearby Mountains</a>
+      </li>
+    </ul>
+</nav>
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="container-fluid">
+            {{map|safe}}
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="container-fluid">
+            <div class="container my-3">
+                <table class="table">
+                    
+                    <thead>
+                        <tr class="thead-dark">
+                            <th>Num</th>
+                            <th>Name</th>
+                            <th>Height</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in page_data %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ row.mt_name }}</td>
+                            <td>{{ row.mt_height }}m</td>
+                        </tr>
+                    </tbody>
+                        {% endfor %}
+                </table>
+            </div>
+            
+            <ul class="pagination">
+                {% if page_data.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_data.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                <li class="page-item active"><a class="page-link" href="#">Page {{ page_data.number }} of {{ page_data.paginator.num_pages }}</a></li>
+                {% if page_data.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_data.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_data.paginator.num_pages }}">last &raquo;</a></li>
+                {% endif %}
+            </ul>
+            </div>
+    </div>
+</div>
