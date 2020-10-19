@@ -5,20 +5,22 @@
     body { padding: 0px; margin: 0px; }
     video {
      position: absolute;
-     top: 0px;
-     left: 0px;
+     top: 0%;
+     right: 0%;
+     left:0%;
+     bottom:0%;
      min-width: 100%;
      min-height: 100%;
      width: auto;
      height: auto;
-     z-index: -1;
+     z-index: -10;
      overflow: hidden;
      }
 
   </style>
     
 
-</head>>
+</head>
 
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -36,16 +38,6 @@
     </ul>
 </nav>
 
-<div class="row">
-    <div class="col-sm-4">
-      <div class="row">
-        <h1>Site description</h1>
-      </div>
-    </div>
-    <div class="col-sm-8">
-      <video autoplay controls loop muted >
-        <source src="/static/vid/mt_video.mp4" type="video/mp4">
-      </video>
-    </div>
-</div>
-
+<video autoplay loop muted >
+  <source src="/static/vid/mt_video.mp4" type="video/mp4">
+</video>
