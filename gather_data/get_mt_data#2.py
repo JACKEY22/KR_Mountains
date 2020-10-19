@@ -96,7 +96,7 @@ for mt_name in data['mt_name']:
 ###########################################
 ## pymongo - insert data
 ###########################################
-with MongoClient('mongodb://192.168.219.104:27017') as client:
+with MongoClient('mongodb://192.168.0.136:27017') as client:
     db = client.mydb
     for i in range(0,len(data['mt_name'])):
         data2 = {"mt_name":data['mt_name'][i],
@@ -112,7 +112,7 @@ with MongoClient('mongodb://192.168.219.104:27017') as client:
                 "mt_acc_lat" :data['mt_acc_lat'][i],
                 "mt_acc_lon":data['mt_acc_lon'][i]
             }
-        db.mountain.insert(data2)
+    db.mountain.insert(data2)
 
 
 #folium - django
