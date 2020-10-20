@@ -19,9 +19,9 @@ from mt import views as mtview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', mtview.home, name='home'),
-    path('home/krmt/', mtview.krmt, name='krmt'),
-    path('home/acc/', mtview.acc, name='acc'),
-    path('home/krmt/detail/<int:mt_num>/', mtview.krmt_detail, name='detail')
+    path('', mtview.home, name='home'),
+    path('krmt/', mtview.krmt, name='krmt'),
+    path('krmt/acc/', mtview.acc, name='acc'),
+    path('krmt/detail/<int:mt_num>/', mtview.krmt_detail, name='detail')
     
 ]
