@@ -15,7 +15,32 @@ data = {
         'mt_address' : [],
         "mt_img_path" :[],
         'mt_img_path_preview':[]
-       }   
+       }  
+acc_data = {
+        "acc_name":[],
+        "acc_address":[],
+        "acc_phone":[],
+        "acc_lon":[],
+        "acc_lat":[],
+        "acc_link":[]
+        }  
+hp_data = {
+        "hp_name":[],
+        "hp_address":[],
+        "hp_phone":[],
+        "hp_lon":[],
+        "hp_lat":[],
+        "hp_link":[]
+        }  
+pm_data = {
+        "pm_name":[],
+        "pm_address":[],
+        "pm_phone":[],
+        "pm_lon":[],
+        "pm_lat":[],
+        "pm_link":[]
+        }  
+code_list = ['AD5','HP8','PM9'] 
 ######################################
 ## blackyark 
 ######################################
@@ -55,7 +80,7 @@ for view in detail_button:
     
 driver.quit()
 
-with MongoClient('mongodb://192.168.0.136:27017') as client:
+with MongoClient('mongodb://192.168.219.104:27017') as client:
     db = client.mydb
     for i in range(1,101):
         mt_data = {
@@ -71,54 +96,21 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
                   }
         db.mountain.insert(mt_data)
 
-######################################
-## kakaoAPI 
-######################################
-
-acc_data = {
-        "mt_num":[],
-        "acc_address":[],
-        "acc_phone":[],
-        "acc_lon":[],
-        "acc_lat":[],
-        "acc_link":[]
-        }  
-hp_data = {
-        "mt_num":[],
-        "hp_address":[],
-        "hp_phone":[],
-        "hp_lon":[],
-        "hp_lat":[],
-        "hp_link":[]
-        }  
-pm_data = {
-        "mt_num":[],
-        "pm_address":[],
-        "pm_phone":[],
-        "pm_lon":[],
-        "pm_lat":[],
-        "pm_link":[]
-        }  
-with MongoClient('mongodb://192.168.0.136:27017') as client:
-    db = client.mydb
-    code_list = ['AD5','HP8','PM9']
-    i = 0
+    
     for code in code_list:
-        for mt_name_temp in data['mt_name']:
-            i = i+1
-            if "(" in mt_name_temp:
-                mt_name = mt_name_temp.split("(")[0]
-            else:
-                mt_name = mt_name_temp
-                
-            url = f'https://dapi.kakao.com/v2/local/search/keyword.json?query={mt_name}&category_group_code={code}'
+        for lat, lon in zip(data['mt_lat'],data['mt_lon']):
+            
+            
+            url =f"https://dapi.kakao.com/v2/local/search/category.json?x={lon}&y={lat}&category_group_code={code}&radius=10000"
+            #url = f'https://dapi.kakao.com/v2/local/search/keyword.json?query={mt_name}&category_group_code={code}'
             headers = {"Authorization": "KakaoAK 9d8f1d66de33937b1015fb76a800fee7"}
             res = requests.get(url, headers = headers).json()
-
+            
+            
             
             if code == 'AD5':
                 if len(res['documents']) >= 1:
-                    acc_data['mt_num'].append(i)
+                    acc_data['acc_name'].append(res['documents'][0]['place_name'])
                     acc_data['acc_address'].append(res['documents'][0]['address_name'])
                     acc_data['acc_phone'].append(res['documents'][0]['phone'])
                     acc_data['acc_lon'].append(res['documents'][0]['x'])
@@ -126,7 +118,7 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
                     acc_data['acc_link'].append(res['documents'][0]['place_url'])
                     
                 else:
-                    acc_data['mt_num'].append(i)
+                    acc_data['acc_name'].append("None")
                     acc_data['acc_address'].append("None")
                     acc_data['acc_phone'].append("None")
                     acc_data['acc_lon'].append("None")
@@ -135,7 +127,7 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
 
             elif code == 'HP8':
                 if len(res['documents']) >= 1:
-                    acc_data['mt_num'].append(i)
+                    hp_data['hp_name'].append(res['documents'][0]['place_name'])
                     hp_data['hp_address'].append(res['documents'][0]['address_name'])
                     hp_data['hp_phone'].append(res['documents'][0]['phone'])
                     hp_data['hp_lon'].append(res['documents'][0]['x'])
@@ -143,15 +135,16 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
                     hp_data['hp_link'].append(res['documents'][0]['place_url'])
                     
                 else:
-                    hp_data['mt_num'].append(i)
+                    hp_data['hp_name'].append("None")
                     hp_data['hp_address'].append("None")
                     hp_data['hp_phone'].append("None")
                     hp_data['hp_lon'].append("None")
                     hp_data['hp_lat'].append("None")
                     hp_data['hp_link'].append("None")
+
             elif code == 'PM9':
                 if len(res['documents']) >= 1:
-                    acc_data['mt_num'].append(i)
+                    pm_data['pm_name'].append(res['documents'][0]['place_name'])
                     pm_data['pm_address'].append(res['documents'][0]['address_name'])
                     pm_data['pm_phone'].append(res['documents'][0]['phone'])
                     pm_data['pm_lon'].append(res['documents'][0]['x'])
@@ -159,7 +152,7 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
                     pm_data['pm_link'].append(res['documents'][0]['place_url'])
                    
                 else:
-                    pm_data['mt_num'].append(i)
+                    pm_data['pm_name'].append("None")
                     pm_data['pm_address'].append("None")
                     pm_data['pm_phone'].append("None")
                     pm_data['pm_lon'].append("None")
@@ -169,6 +162,7 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
     for i in range(1,101):
         data1 = {
                     "mt_num":i,
+                    "acc_name":acc_data['acc_name'][i-1],
                     "acc_address":acc_data['acc_address'][i-1],
                     "acc_phone":acc_data['acc_phone'][i-1],
                     "acc_lon":acc_data['acc_lon'][i-1],
@@ -180,6 +174,7 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
         
         data2 = {
                     "mt_num":i,
+                    "hp_name":hp_data['hp_name'][i-1],
                     "hp_address":hp_data['hp_address'][i-1],
                     "hp_phone":hp_data['hp_phone'][i-1],
                     "hp_lon":hp_data['hp_lon'][i-1],
@@ -191,6 +186,7 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
 
         data3 = {
                     "mt_num":i,
+                    "pm_name":pm_data['pm_name'][i-1],
                     "pm_address":pm_data['pm_address'][i-1],
                     "pm_phone":pm_data['pm_phone'][i-1],
                     "pm_lon":pm_data['pm_lon'][i-1],
