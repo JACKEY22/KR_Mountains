@@ -4,7 +4,7 @@ from pymongo import MongoClient
 ## openWeather - get weather info
 ############################################
 def weather():
-    with MongoClient('mongodb://192.168.0.136:27017') as client:
+    with MongoClient('mongodb://192.168.219.104:27017') as client:
         db = client.mydb
         data_list = list(db.mountain.find({}))
 
