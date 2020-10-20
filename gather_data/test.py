@@ -100,7 +100,7 @@ pm_data = {
         "pm_link":[]
         }  
 with MongoClient('mongodb://192.168.0.136:27017') as client:
-    db = client.mydb2
+    db = client.mydb
     code_list = ['AD5','HP8','PM9']
     i = 0
     for code in code_list:
