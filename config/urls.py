@@ -22,6 +22,6 @@ urlpatterns = [
     path('home/', mtview.home, name='home'),
     path('home/krmt/', mtview.krmt, name='krmt'),
     path('home/acc/', mtview.acc, name='acc'),
-    
+    path('home/krmt/detail/', mtview.krmt_detail, name='detail')
     
 ]
