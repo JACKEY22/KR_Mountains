@@ -85,13 +85,13 @@ for mt_name in data['mt_name']:
         mt_acc_link = res['documents'][0]['place_url']
         mt_acc_lon = res['documents'][0]['x']
         mt_acc_lat = res['documents'][0]['y']
-    else:
-        mt_acc_address = "Null"
-        mt_acc_phone = "Null"
-        mt_acc_name = "Null"
-        mt_acc_link = "Null"
-        mt_acc_lon = "Null"
-        mt_acc_lat = "Null"
+    # else:
+    #     mt_acc_address = "Null"
+    #     mt_acc_phone = "Null"
+    #     mt_acc_name = "Null"
+    #     mt_acc_link = "Null"
+    #     mt_acc_lon = "Null"
+    #     mt_acc_lat = "Null"
     data['mt_acc_address'].append(mt_acc_address)
     data['mt_acc_phone'].append(mt_acc_phone)
     data['mt_acc_name'].append(mt_acc_name)
@@ -101,25 +101,30 @@ for mt_name in data['mt_name']:
 ###########################################
 ## pymongo - insert data
 ###########################################
-with MongoClient('mongodb://192.168.219.104:27017') as client:
+with MongoClient('mongodb://192.168.0.136:27017') as client:
     db = client.mydb
-    for i in range(0,len(data['mt_name'])):
-        data2 = {"mt_name":data['mt_name'][i],
+    for i in range(1,len(data['mt_name']-1)):
+        data2 = {"mt_num":i,
+                "mt_name":data['mt_name'][i],
                 "mt_height":data['mt_height'][i],
                 "mt_lat":data['mt_lat'][i],
                 "mt_lon":data['mt_lon'][i],
                 "mt_comment":data['mt_comment'][i],
                 "mt_address":data['mt_address'][i],
                 "mt_img_path":data['mt_img_path'][i],
-                "mt_img_path_preview":data['mt_img_path_preview'][i],
+                "mt_img_path_preview":data['mt_img_path_preview'][i]
+            }
+        db.mountain.insert(data2)
+    for i in range(0,len(data['mt_acc_name'])):
+        data3 = {
                 "mt_acc_address":data['mt_acc_address'][i],
                 "mt_acc_phone" :data['mt_acc_phone'][i],
                 "mt_acc_name":data['mt_acc_name'][i],
                 "mt_acc_link":data['mt_acc_link'][i],
                 "mt_acc_lat" :data['mt_acc_lat'][i],
                 "mt_acc_lon":data['mt_acc_lon'][i]
-            }
-        db.mountain.insert(data2)
+        }
+        db.acc.insert(data3)    
 
 
 # name - link 
