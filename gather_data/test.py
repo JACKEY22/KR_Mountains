@@ -166,39 +166,39 @@ with MongoClient('mongodb://192.168.0.136:27017') as client:
                     pm_data['pm_lat'].append("None")
                     pm_data['pm_link'].append("None")
                     
-for i in range(1,101):
-    data1 = {
-                "mt_num":i,
-                "acc_address":acc_data['acc_address'][i-1],
-                "acc_phone":acc_data['acc_phone'][i-1],
-                "acc_lon":acc_data['acc_lon'][i-1],
-                "acc_lat":acc_data['acc_lat'][i-1],
-                "acc_link":acc_data['acc_link'][i-1]
+    for i in range(1,101):
+        data1 = {
+                    "mt_num":i,
+                    "acc_address":acc_data['acc_address'][i-1],
+                    "acc_phone":acc_data['acc_phone'][i-1],
+                    "acc_lon":acc_data['acc_lon'][i-1],
+                    "acc_lat":acc_data['acc_lat'][i-1],
+                    "acc_link":acc_data['acc_link'][i-1]
 
-            }
-    db.acc.insert(data1)
-    
-    data2 = {
-                "mt_num":i,
-                "hp_address":hp_data['hp_address'][i-1],
-                "hp_phone":hp_data['hp_phone'][i-1],
-                "hp_lon":hp_data['hp_lon'][i-1],
-                "hp_lat":hp_data['hp_lat'][i-1],
-                "hp_link":hp_data['hp_link'][i-1]
+                }
+        db.acc.insert(data1)
+        
+        data2 = {
+                    "mt_num":i,
+                    "hp_address":hp_data['hp_address'][i-1],
+                    "hp_phone":hp_data['hp_phone'][i-1],
+                    "hp_lon":hp_data['hp_lon'][i-1],
+                    "hp_lat":hp_data['hp_lat'][i-1],
+                    "hp_link":hp_data['hp_link'][i-1]
 
-            }
-    db.hp.insert(data2) 
+                }
+        db.hp.insert(data2) 
 
-    data3 = {
-                "mt_num":i,
-                "pm_address":pm_data['pm_address'][i-1],
-                "pm_phone":pm_data['pm_phone'][i-1],
-                "pm_lon":pm_data['pm_lon'][i-1],
-                "pm_lat":pm_data['pm_lat'][i-1],
-                "pm_link":pm_data['pm_link'][i-1]
+        data3 = {
+                    "mt_num":i,
+                    "pm_address":pm_data['pm_address'][i-1],
+                    "pm_phone":pm_data['pm_phone'][i-1],
+                    "pm_lon":pm_data['pm_lon'][i-1],
+                    "pm_lat":pm_data['pm_lat'][i-1],
+                    "pm_link":pm_data['pm_link'][i-1]
 
-            }
-    db.pm.insert(data3) 
+                }
+        db.pm.insert(data3) 
 
                     
             
