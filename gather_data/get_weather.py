@@ -26,5 +26,5 @@ def weather():
             #db.weather.insert(data_temp)
             db.weather.update({'mt_name':data_temp['mt_name']},{ '$set':{'mt_num':data_temp['mt_num'],'mt_weather_main': data_temp['mt_weather_main'],'temp': data_temp['temp'],'sunrise':data_temp['sunrise'],'sunset':data_temp['sunset'],'wind_speed':data_temp['wind_speed'],'wind_deg':data_temp['wind_deg']}})
             # { '$set':{data_temp}}})
-weather()
+#weather()
         
