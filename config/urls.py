@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mtview.home, name='home'),
     path('krmt/', mtview.krmt, name='krmt'),
-    path('krmt/acc/', mtview.acc, name='acc'),
-    path('krmt/detail/<int:mt_num>/', mtview.krmt_detail, name='detail')
+    path('krmt/detail/<int:mt_num>/', mtview.krmt_detail, name='detail'),
+    path('krmt/detailview/<int:mt_num>/', mtview.krmt_detail_view, name='detailview')
     
 ]

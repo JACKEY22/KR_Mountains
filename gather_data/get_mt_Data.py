@@ -116,6 +116,14 @@ with MongoClient('mongodb://192.168.219.104:27017') as client:
                     acc_data['acc_lon'].append(res['documents'][0]['x'])
                     acc_data['acc_lat'].append(res['documents'][0]['y'])
                     acc_data['acc_link'].append(res['documents'][0]['place_url'])
+                
+                # elif len(res['documents']) >= 2:
+                #     acc_data['acc_name'].append(res['documents'][1]['place_name'])
+                #     acc_data['acc_address'].append(res['documents'][1]['address_name'])
+                #     acc_data['acc_phone'].append(res['documents'][1]['phone'])
+                #     acc_data['acc_lon'].append(res['documents'][1]['x'])
+                #     acc_data['acc_lat'].append(res['documents'][1]['y'])
+                #     acc_data['acc_link'].append(res['documents'][1]['place_url'])
                     
                 else:
                     acc_data['acc_name'].append("None")

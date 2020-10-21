@@ -18,9 +18,6 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'krmt' %}"> Mountain Map</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'acc' %}"> Accommodation Nearby Mountains</a>
-      </li>
     </ul>
 </nav>
 
@@ -49,8 +46,8 @@
                         {% for row in page_data %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td><a href="detail/{{ row.mt_num }}/" target="_blank">{{ row.mt_name }}</a></td>
-                            <td>{{ row.mt_address }}</td>
+                            <td><a href="detailview/{{ row.mt_num }}/" target="_blank">{{ row.mt_name }}</a></td>
+                            <td><a href="detail/{{ row.mt_num }}/" target="_blank">{{ row.mt_address }}</a></td>
                             <td>{{ row.mt_height }}m</td>
                         </tr>
                     </tbody>

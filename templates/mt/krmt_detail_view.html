@@ -1,0 +1,32 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <style>
+        div.card{
+            width: 1000px;
+            height: 200px;
+        }    
+        div.container-fluid{
+            margin: auto; 
+        }
+    </style>
+</head>
+
+<div class="container-fluid">
+    <div class="container my-3">
+        <div class="card">
+            <img class="card-img-top" src={{mt_img_path}} alt="Card image" width=800px; height=400px;>
+            <div class="card-body">
+              <h4 class="card-title">{{mt_address}} {{mt_name}}</h4>
+              <p class="card-text">{{mt_comment}}</p>
+              <p class="card-text">height : {{mt_height}}m</p>
+              <p class="card-text">latitude : {{mt_lat}} </p>
+              <p class="card-text">longtitude : {{mt_lon}} </p>
+              <p class="card-text">sunrise : {{sunrise}} (unix)</p>
+              <p class="card-text">sunset : {{sunset}} (unix)</p>
+              <p class="card-text">wind_speed : {{wind_speed}}</p>
+              <p class="card-text">wind_deg : {{wind_deg}}</p>
+            </div>
+          </div>
+    </div>
+</div>
