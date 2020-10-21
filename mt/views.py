@@ -15,7 +15,7 @@ def krmt(request):
     center = [37.541, 126.986]
     m = folium.Map(center, zoom_start=7)
 
-    with MongoClient('mongodb://192.168.219.104:27017') as client:
+    with MongoClient('mongodb://192.168.0.136:27017') as client:
         db = client.mydb 
         mt_data_list = list(db.mountain.find({}))
         wt_data_list = list(db.weather.find({}))
@@ -26,7 +26,7 @@ def krmt(request):
                 f"<img src={mt_data['mt_img_path_preview']} width=300px; height=300px;><br>" +
                 f"<a href='detail/{mt_data['mt_num']}/' target='_blank'><b>Mountain : {mt_data['mt_name']}</a><br>" +
                 f"<b>Height : {mt_data['mt_height']}m<br>" +
-                f"<b>Current weather : {wt_data['mt_weather_main']} <br>Current temperature : {wt_data['temp']}°C", script=True
+                f"<b>Current weather : {wt_data['mt_weather_main']} <br>Current temperature : {wt_data['temp']}°C" , script=True
             )
             pop_up = folium.Popup(pop_text)
             folium.Marker(lat_lon, popup=pop_up, tooltip=mt_data['mt_name']).add_to(m)
@@ -39,7 +39,7 @@ def krmt(request):
     return render(request, 'mt/krmt.html', context={'page_data':page_data, 'map':m})
     
 def krmt_detail(request, mt_num):
-    with MongoClient('mongodb://192.168.219.104:27017') as client:
+    with MongoClient('mongodb://192.168.0.136:27017') as client:
         db = client.mydb 
 
         mt_data = db.mountain.find({"mt_num" : mt_num})[0]
@@ -90,7 +90,7 @@ def krmt_detail(request, mt_num):
         pop_text = folium.Html(
                 f"<img src={mt_data['mt_img_path_preview']} width=300px; height=300px;><br>" +
                 f"<b>Mountain : {mt_data['mt_name']} <br>" +
-                f"<b>Height : {mt_data['mt_height']}m< br>" +
+                f"<b>Height : {mt_data['mt_height']}m <br>" +
                 f"<b>Current weather : {wt_data['mt_weather_main']} <br> Current temperature : {wt_data['temp']}°C", script=True
             )
         pop_up = folium.Popup(pop_text)
@@ -103,7 +103,7 @@ def krmt_detail(request, mt_num):
     return render(request, 'mt/krmt_detail.html', context={'map':m})
 
 def krmt_detail_view(request, mt_num):
-    with MongoClient('mongodb://192.168.219.104:27017') as client:
+    with MongoClient('mongodb://192.168.0.136:27017') as client:
         db = client.mydb 
         data ={
                 'mt_name' : db.mountain.find({"mt_num" : mt_num})[0]['mt_name'],
