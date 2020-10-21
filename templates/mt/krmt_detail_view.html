@@ -12,24 +12,6 @@
     </style>
 </head>
 
-<!-- <div class="container-fluid">
-    <div class="container my-3">
-        <div class="card">
-            <img class="card-img-top" src={{mt_img_path}} alt="Card image" >
-            <div class="card-body">
-              <h4 class="card-title">{{mt_address}} {{mt_name}}</h4>
-              <p class="card-text">{{mt_comment}}</p>
-              <p class="card-text">height : {{mt_height}}m</p>
-              <p class="card-text">latitude : {{mt_lat}} </p>
-              <p class="card-text">longtitude : {{mt_lon}} </p>
-              <p class="card-text">sunrise : {{sunrise}} (unix)</p>
-              <p class="card-text">sunset : {{sunset}} (unix)</p>
-              <p class="card-text">wind_speed : {{wind_speed}}m/s</p>
-              <p class="card-text">wind_deg : {{wind_deg}}</p>
-            </div>
-          </div>
-    </div>
-</div> -->
 <div class="container my-3">
     <h2 class="border-bottom py-2">{{mt_address}} {{mt_name}}</h2>
     <div class="card my-3">
@@ -42,15 +24,16 @@
             </div>
         </div>
     </div>
-    <h5 class="border-bottom my-3 py-2">Current Weather</h5>
+    <h5 class="border-bottom my-3 py-2">Weather</h5>
     
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">
-                Sunrise : {{sunrise}} (unix)<br>
-                Sunset : {{sunset}} (unix)<br>
+                Current Temp : {{temp}}°C - {{weather_main}}<br>
                 Wind_speed : {{wind_speed}}m/s<br>
                 Wind_deg : {{wind_deg}}<br>
+                Sunrise : {{sunrise}} (unix)<br>
+                Sunset : {{sunset}} (unix)<br>
             </div>
             <div class="d-flex justify-content-end">
                 <div class="badge badge-light p-2">
@@ -60,7 +43,7 @@
         </div>
     </div>
 
-    <h5 class="border-bottom my-3 py-2">Location info</h5>
+    <h5 class="border-bottom my-3 py-2">Geographic info</h5>
     
     <div class="card my-3">
         <div class="card-body">

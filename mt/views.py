@@ -135,7 +135,9 @@ def krmt_detail_view(request, mt_num):
                 'sunrise' : db.weather.find({"mt_num" : mt_num})[0]['sunrise'],
                 'sunset' : db.weather.find({"mt_num" : mt_num})[0]['sunset'],
                 'wind_speed' : db.weather.find({"mt_num" : mt_num})[0]['wind_speed'],
-                'wind_deg' : db.weather.find({"mt_num" : mt_num})[0]['wind_deg']
+                'wind_deg' : db.weather.find({"mt_num" : mt_num})[0]['wind_deg'],
+                'weather_main' : db.weather.find({"mt_num" : mt_num})[0]['mt_weather_main'],
+                'temp' : db.weather.find({"mt_num" : mt_num})[0]['temp']
               }   
 
     return render(request, 'mt/krmt_detail_view.html', context=data)
