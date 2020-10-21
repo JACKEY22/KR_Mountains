@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as bs
 from pymongo import MongoClient
 import json
 import requests
-
+#192.168.0.136
 data = {
         "mt_name":[],
         "mt_height":[],
@@ -80,7 +80,7 @@ for view in detail_button:
     
 driver.quit()
 
-with MongoClient('mongodb://192.168.219.104:27017') as client:
+with MongoClient('mongodb://192.168.0.136:27017') as client:
     db = client.mydb
     for i in range(1,101):
         mt_data = {
