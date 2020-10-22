@@ -1,8 +1,7 @@
 # KR_Mountains
 ## Good
-<img src="https://img.youtube.com/vi/RAwLuS_L0nA/hqdefault.jpg" width="300">
-https://img.youtube.com/vi/RAwLuS_L0nA/hqdefault.jpg
-https://www.youtube.com/watch?v=RAwLuS_L0nA
 
-[![SC2 Video](https://img.youtube.com/vi/RAwLuS_L0nA/hqdefault.jpg)]
+
+
+[![SC2 Video](https://img.youtube.com/vi/RAwLuS_L0nA/hqdefault.jpg)]<br>
 (https://youtu.be/RAwLuS_L0nA)
