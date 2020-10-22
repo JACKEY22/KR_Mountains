@@ -16,18 +16,18 @@
      z-index: -10;
      overflow: hidden;
      }
+     .jb-text { position: absolute; top: 50%; width: 100%; }
+     .jb-text p { margin-top: -24px; text-align: center; font-size: 48px; color: #ffffff; }
+
 
   </style>
-    
-
 </head>
 
 
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <!-- Brand -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  
     <a class="navbar-brand" href="{% url 'home' %}">Korea Top-100 Mountains</a>
   
-    <!-- Links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" href="{% url 'krmt' %}"> Map</a>
@@ -35,6 +35,11 @@
     </ul>
 </nav>
 
-<video autoplay loop muted >
-  <source src="/static/vid/mt_video.mp4" type="video/mp4">
-</video>
+<div class="jb-box">
+  <video autoplay loop muted >
+    <source src="/static/vid/mt_video.mp4" type="video/mp4">
+  </video>
+  <div class="jb-text">
+    <p>Korea Top 100 Mountains</p>
+  </div>
+</div>

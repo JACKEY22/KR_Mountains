@@ -9,7 +9,7 @@
         }
     </style>
 </head>
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="{% url 'home' %}">Korea Top-100 Mountains</a>
   
@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <div class="container my-3">
                 <table class="table">
-                    
+                    <h1>Top 100 Mountain List</h1><br>
                     <thead>
                         <tr class="thead-light">
                             <th>Num</th>
@@ -53,10 +53,13 @@
                     </tbody>
                         {% endfor %}
                 </table>
+                <br>
+                
             <form action="/krmt/search" method="get">
-                Mountain name : <input type="text" name="mt_name">
+                <b>Mountain name : <input type="text" name="mt_name">
                 <input type="submit" value="Search">
             </form> 
+                
             </div>
                 <ul class="pagination">
                     {% if page_data.has_previous %}
