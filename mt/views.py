@@ -142,11 +142,46 @@ def krmt_detail_view(request, mt_num):
 
     return render(request, 'mt/krmt_detail_view.html', context=data)
 
-# def search(request):
-#     #data = {"first":"jeon", "second":"shine"}
-#     data = dict()
-#     data['mt_name'] = request.GET['first']
-#     return render(request, 'mt/search.html', context=data)
+def search(request):
+    center = [36.6691961, 127.9295186]
+    m = folium.Map(center, zoom_start=7)
+    marker_cluster = MarkerCluster().add_to(m)
+    
+    data = dict()
+    data['mt_name'] = request.GET['mt_name']
+
+    with MongoClient('mongodb://192.168.0.136:27017') as client:
+        db = client.mydb 
+
+        mt_data_list = list(db.mountain.find({}))
+        wt_data_list = list(db.weather.find({}))
+        mt_data_list3 = []
+        for mt_data, wt_data in zip(mt_data_list,wt_data_list):
+            mt_address_temp = mt_data['mt_address']
+            mt_address = mt_address_temp.split(" ")[0]
+            if mt_address in mt_data['mt_address']:
+                lat_lon = [mt_data['mt_lat'], mt_data['mt_lon']]
+                pop_text = folium.Html(
+                    f"<img src={mt_data['mt_img_path_preview']} width=300px; height=300px;><br>" +
+                    f"<a href='detail/{mt_data['mt_num']}/' target='_blank'><b>Mountain : {mt_data['mt_name']}</a><br>" +
+                    f"<b>Height : {mt_data['mt_height']}m<br>" +
+                    f"<b>Current weather : {wt_data['mt_weather_main']} <br>Current temperature : {wt_data['temp']}°C" , script=True
+                )
+                pop_up = folium.Popup(pop_text)
+                folium.Marker(lat_lon, popup=pop_up, tooltip=mt_data['mt_name']).add_to(marker_cluster)
+
+        mt_name_list = [mt_data['mt_name'] for mt_data in mt_data_list]
+        for mt_name in mt_name_list:
+            if data['mt_name'] in mt_name:
+                mt_data_list2 = list(db.mountain.find({"mt_name":mt_name}))
+                for x in mt_data_list2:
+                    mt_data_list3.append(x)
+
+        paginator = Paginator(mt_data_list3,10)
+        page =request.GET.get('page',1)
+        page_data = paginator.get_page(page)
+    m = m._repr_html_()
+    return render(request, 'mt/search.html', context={'page_data':page_data, 'map':m})
 
 def house(request):
     pass
