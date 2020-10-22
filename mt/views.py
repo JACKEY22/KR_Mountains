@@ -18,7 +18,7 @@ def krmt(request):
     m = folium.Map(center, zoom_start=7)
     marker_cluster = MarkerCluster().add_to(m)
 
-    with MongoClient('mongodb://192.168.0.136:27017') as client:
+    with MongoClient('mongodb://192.168.219.104:27017') as client:
         db = client.mydb 
         mt_data_list = list(db.mountain.find({}))
         wt_data_list = list(db.weather.find({}))
@@ -45,7 +45,7 @@ def krmt(request):
     return render(request, 'mt/krmt.html', context={'page_data':page_data, 'map':m})
     
 def krmt_detail(request, mt_num):
-    with MongoClient('mongodb://192.168.0.136:27017') as client:
+    with MongoClient('mongodb://192.168.219.104:27017') as client:
         db = client.mydb 
 
         mt_data = db.mountain.find({"mt_num" : mt_num})[0]
@@ -122,7 +122,7 @@ def krmt_detail(request, mt_num):
     return render(request, 'mt/krmt_detail.html', context={'map':m})
 
 def krmt_detail_view(request, mt_num):
-    with MongoClient('mongodb://192.168.0.136:27017') as client:
+    with MongoClient('mongodb://192.168.219.104:27017') as client:
         db = client.mydb 
         data ={
                 'mt_name' : db.mountain.find({"mt_num" : mt_num})[0]['mt_name'],
@@ -150,7 +150,7 @@ def search(request):
     data = dict()
     data['mt_name'] = request.GET['mt_name']
 
-    with MongoClient('mongodb://192.168.0.136:27017') as client:
+    with MongoClient('mongodb://192.168.219.104:27017') as client:
         db = client.mydb 
 
         mt_data_list = list(db.mountain.find({}))
