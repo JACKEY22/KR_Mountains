@@ -14,7 +14,7 @@ def home(request):
     return render(request, 'mt/home.html')
 
 def krmt(request):
-    center = [37.541, 126.986]
+    center = [36.6691961, 127.9295186]
     m = folium.Map(center, zoom_start=7)
     marker_cluster = MarkerCluster().add_to(m)
 
@@ -106,14 +106,14 @@ def krmt_detail(request, mt_num):
         folium.Circle(
         lat_lon,
         radius=5000,
-        color='#ffffgg',
+        color='#fffggg',
         fill_color='#fffggg',
         popup='10km'
         ).add_to(m)
 
         folium.Circle(lat_lon,
         radius=2500,
-        color='#ffffgg',
+        color='#fffggg',
         fill_color='#fffggg',
         popup='5km'
         ).add_to(m)
@@ -141,5 +141,15 @@ def krmt_detail_view(request, mt_num):
               }   
 
     return render(request, 'mt/krmt_detail_view.html', context=data)
+
+# def search(request):
+#     #data = {"first":"jeon", "second":"shine"}
+#     data = dict()
+#     data['mt_name'] = request.GET['first']
+#     return render(request, 'mt/search.html', context=data)
+
+def house(request):
+    pass
+    return render(request, 'house/house.html')
 
 
