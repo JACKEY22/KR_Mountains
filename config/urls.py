@@ -23,6 +23,7 @@ urlpatterns = [
     path('krmt/', mtview.krmt, name='krmt'),
     path('krmt/detail/<int:mt_num>/', mtview.krmt_detail, name='detail'),
     path('krmt/detailview/<int:mt_num>/', mtview.krmt_detail_view, name='detailview'),
-    path('house/', mtview.house, name='house')
+    path('house/', mtview.house, name='house'),
+    path('krmt/search/', mtview.search),
     
 ]
