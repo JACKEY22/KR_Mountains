@@ -4,7 +4,7 @@ from pymongo import MongoClient
 ## openWeather - get weather info
 ############################################
 def weather():
-    with MongoClient('mongodb://192.168.219.104:27017') as client:
+    with MongoClient('mongodb://192.168.0.136:27017') as client:
         db = client.mydb
         data_list = list(db.mountain.find({}))
 
@@ -23,8 +23,8 @@ def weather():
             data_temp['wind_speed']=res['current']['wind_speed']
             data_temp['wind_deg']=res['current']['wind_deg']
 
-            #db.weather.insert(data_temp)
-            db.weather.update({'mt_name':data_temp['mt_name']},{ '$set':{'mt_num':data_temp['mt_num'],'mt_weather_main': data_temp['mt_weather_main'],'temp': data_temp['temp'],'sunrise':data_temp['sunrise'],'sunset':data_temp['sunset'],'wind_speed':data_temp['wind_speed'],'wind_deg':data_temp['wind_deg']}})
+            db.weather.insert(data_temp)
+            #db.weather.update({'mt_name':data_temp['mt_name']},{ '$set':{'mt_num':data_temp['mt_num'],'mt_weather_main': data_temp['mt_weather_main'],'temp': data_temp['temp'],'sunrise':data_temp['sunrise'],'sunset':data_temp['sunset'],'wind_speed':data_temp['wind_speed'],'wind_deg':data_temp['wind_deg']}})
             # { '$set':{data_temp}}})
-#weather()
+weather()
         
