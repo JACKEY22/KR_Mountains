@@ -1,4 +1,4 @@
-# KR_Mountains
+# KR_Top_100_Mountains
 
 <img src="static/img/Screenshot from 2020-10-22 15-46-06.png" width="300">
 <img src="static/img/Screenshot from 2020-10-22 15-46-10.png" width="300">
