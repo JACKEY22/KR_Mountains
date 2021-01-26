@@ -11,5 +11,6 @@
 - code neatly
 - need basic html, css, js knowledge
 - not 1/10 pagination
+- using model 
 
 ### Youtube Link [https://youtu.be/RAwLuS_L0nA]
