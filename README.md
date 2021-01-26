@@ -10,5 +10,6 @@
 - code based on *function* next time
 - code neatly
 - need basic html, css, js knowledge
+- not 1/10 pagination
 
 ### Youtube Link [https://youtu.be/RAwLuS_L0nA]
