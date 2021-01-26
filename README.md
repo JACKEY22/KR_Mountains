@@ -1,14 +1,14 @@
 # Korean Top 100 Mountains Map Board
 
-###stack 
+### stack 
 - tool : vscode
 - develop : python, django, selenium, bs4, folium, mongodb,
 
-###code 
-
-###feedback
-- code based on function next time
+### code 
+ 
+### feedback
+- code based on *function* next time
 - code neatly
 - need basic html, css, js knowledge
 
-###Youtube Link [https://youtu.be/RAwLuS_L0nA]
+### Youtube Link [https://youtu.be/RAwLuS_L0nA]
