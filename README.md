@@ -1,9 +1,13 @@
-# 한국 100대 명산과 근처 병원 및 약국 정보 게시판 [https://youtu.be/RAwLuS_L0nA]
+# 한국 100대 명산 게시판 [https://youtu.be/RAwLuS_L0nA]
  
-### feedback
-- code based on *function* next time
-- code neatly
-- need basic html, css, js knowledge
-- not 1/10 pagination
-- using model 
+- 100대 명산 데이터 크롤링(블랙야크)
+- 100대 명산 반경 10km이내 약국 병원 데이터 크롤링(카카오 openAPI)
+- 100대 명산 기상 데이터 크롤링(openweather openAPI)
+
+### 피드백
+- 반복해서 사용하는 코드는 함수를 만들어 하나의 기능으로 사용할 것
+- 코드를 간결하게 작성하고 변수와 함수를 직관적으로 사용해 코드를 보고 흐름을 알 수 있게
+- html, css, js 기본 지식 
+- 1/10 페이지네이션이 아닌 보편적으로 사용되는 페이지네이션 구현
+- 모델과 관계형 데이터베이스를 사용 
 
