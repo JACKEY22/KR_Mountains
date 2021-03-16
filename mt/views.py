@@ -2,15 +2,11 @@ from django.shortcuts import render
 import folium
 from pymongo import MongoClient
 from django.core.paginator import Paginator
-import requests
-from urllib import parse
 from folium.plugins import MarkerCluster
 
 # Create your views here.
-#192.168.219.104
-#192.168.0.136
+
 def home(request):
-    pass
     return render(request, 'mt/home.html')
 
 def krmt(request):
@@ -23,7 +19,7 @@ def krmt(request):
         mt_data_list = list(db.mountain.find({}))
         wt_data_list = list(db.weather.find({}))
 
-        for mt_data, wt_data in zip(mt_data_list,wt_data_list):
+        for mt_data, wt_data in zip(mt_data_list, wt_data_list):
             mt_address_temp = mt_data['mt_address']
             mt_address = mt_address_temp.split(" ")[0]
             if mt_address in mt_data['mt_address']:
@@ -32,13 +28,13 @@ def krmt(request):
                     f"<img src={mt_data['mt_img_path_preview']} width=300px; height=300px;><br>" +
                     f"<a href='detail/{mt_data['mt_num']}/' target='_blank'><b>Mountain : {mt_data['mt_name']}</a><br>" +
                     f"<b>Height : {mt_data['mt_height']}m<br>" +
-                    f"<b>Current weather : {wt_data['mt_weather_main']} <br>Current temperature : {wt_data['temp']}°C" , script=True
+                    f"<b>Current weather : {wt_data['mt_weather_main']} <br>Current temperature : {wt_data['temp']}°C", script=True
                 )
                 pop_up = folium.Popup(pop_text)
                 folium.Marker(lat_lon, popup=pop_up, tooltip=mt_data['mt_name']).add_to(marker_cluster)
 
-    paginator = Paginator(mt_data_list,10)
-    page =request.GET.get('page',1)
+    paginator = Paginator(mt_data_list, 10)
+    page =request.GET.get('page', 1)
     page_data = paginator.get_page(page)
 
     m = m._repr_html_()
@@ -183,8 +179,5 @@ def search(request):
     m = m._repr_html_()
     return render(request, 'mt/search.html', context={'page_data':page_data, 'map':m})
 
-def house(request):
-    pass
-    return render(request, 'house/house.html')
 
 

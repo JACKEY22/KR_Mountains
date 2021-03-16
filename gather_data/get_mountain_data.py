@@ -3,7 +3,6 @@ from selenium.webdriver.common.keys import Keys as keys
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup as bs 
 from pymongo import MongoClient
-import json
 import requests
 #192.168.0.136
 data = {
