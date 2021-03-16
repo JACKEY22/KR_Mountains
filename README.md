@@ -4,7 +4,7 @@
 - 언어 : python
 - 웹프레임워크 : django
 - 데이터베이스 : mongodb
-- 스크래핑 : bs4, selenium
+- 스크래핑 : bs4, selenium, schedule
   
 ### 기능
 - 100대 명산을 군집화해 지도에 표기
