@@ -1,6 +1,6 @@
 # 한국 100대 명산 게시판 [https://youtu.be/RAwLuS_L0nA]
 
-### 스택
+### 적용기술
 - 언어 : python
 - 웹프레임워크 : django
 - 데이터베이스 : mongodb
