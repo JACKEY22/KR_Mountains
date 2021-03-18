@@ -1,4 +1,4 @@
-# 한국 100대 명산 게시판 [https://youtu.be/RAwLuS_L0nA]
+# 팀 프로젝트 - 한국 100대 명산 게시판 [https://youtu.be/RAwLuS_L0nA]
 
 ### 적용기술
 - 언어 : python
